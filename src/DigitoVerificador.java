@@ -1,17 +1,19 @@
 import java.util.Scanner;
 
 public class DigitoVerificador {
+    private final static Scanner scanner = new Scanner(System.in);
+    private final static int VALOR_MAXIMO = 99999999;
+    private final static int VALOR_MINIMO = 1000000;
+
     public static void main(String[] args) {
         pedirRut();
+        scanner.close();
     }
 
     public static void pedirRut() {
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("Por favor ingrese su rut sin puntos ni digito verificador.");
         String line = scanner.nextLine();
-        verificarNumeroRut(line);
-        scanner.close();
+        verificarNumeroRut(line);        
     }
 
     public static void verificarNumeroRut(String line) {
@@ -24,10 +26,7 @@ public class DigitoVerificador {
     }
 
     public static void verificarTamañoRut(int rut) {
-        int valorMaximo = 99999999;
-        int valorMinimo = 1000000;
-
-        if (rut < valorMinimo || rut > valorMaximo) {
+        if (rut < VALOR_MINIMO || rut > VALOR_MAXIMO) {
             pedirRut();
         } else {
             convertirIntAArreglo(rut);
@@ -75,9 +74,8 @@ public class DigitoVerificador {
             multiplicacionCadenas += auxMultiplicacion;
         }
 
-        int division = multiplicacionCadenas / 11;
-        int multiplicacionFinal = division * 11;
-        int resultadoDigitoVerificador = multiplicacionCadenas - multiplicacionFinal;
+        int division = multiplicacionCadenas % 11;
+        int resultadoDigitoVerificador = 11 - division;
         imprimirDigitoVerificador(resultadoDigitoVerificador);
     }
 
