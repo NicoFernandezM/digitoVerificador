@@ -75,7 +75,7 @@ public class DigitoVerificador {
 
         int division = multiplicacionCadenas / 11;
         int multiplicacionFinal = division * 11;
-        int resultadoDigitoVerificador = multiplicacionCadenas - multiplicacionFinal;
+        int resultadoDigitoVerificador = 11 - (multiplicacionCadenas - multiplicacionFinal);
         imprimirDigitoVerificador(resultadoDigitoVerificador);
     }
 
