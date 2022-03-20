@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class DigitoVerificador {
     public static void main(String[] args) {
@@ -37,14 +36,7 @@ public class DigitoVerificador {
 
     public static void convertirIntAArreglo(int rut) {
         char [] chars = String.valueOf(rut).toCharArray();
-        //imprimir(chars);
         invertirRut(chars);
-    }
-
-    public static void imprimir(char[] chars) {
-        for(int i = 0; i < chars.length; i++ ) {
-            System.out.println(chars[i]);
-        }
     }
 
     public static void invertirRut(char[] rut) {
@@ -65,17 +57,16 @@ public class DigitoVerificador {
             if(numeroMultiplicador < 8) {
                 cadenaParaMultiplicar[i] = numeroMultiplicador;
                 numeroMultiplicador++;
-                System.out.println(cadenaParaMultiplicar[i]);
             }else {
                 numeroMultiplicador = 2;
                 i--;
             }
         }
 
-        //multiplicarCadenas(cadenaParaMultiplicar, rutInvertido);
+        multiplicarCadenas(cadenaParaMultiplicar, rutInvertido);
     }
 
-    /*public static void multiplicarCadenas(int [] cadenaParaMultiplicar, char [] rutInvertido) {
+    public static void multiplicarCadenas(int [] cadenaParaMultiplicar, char [] rutInvertido) {
         int multiplicacionCadenas = 0;
         int digitoRutAMultiplicar = 0;
         int auxMultiplicacion = 0;
@@ -83,18 +74,20 @@ public class DigitoVerificador {
         for(int i = 0; i < rutInvertido.length; i++) {
             digitoRutAMultiplicar = convertirCharAInt(rutInvertido, i);
             auxMultiplicacion = cadenaParaMultiplicar[i] * digitoRutAMultiplicar;
-            multiplicacionCadenas = auxMultiplicacion + multiplicacionCadenas;
+            multiplicacionCadenas += auxMultiplicacion;
         }
 
-        System.out.println(multiplicacionCadenas);
+        int division = multiplicacionCadenas / 11;
+        int multiplicacionFinal = division * 11;
+        int resultadoDigitoVerificador = multiplicacionCadenas - multiplicacionFinal;
+        imprimirDigitoVerificador(resultadoDigitoVerificador);
     }
 
     public static int convertirCharAInt(char [] rutInvertido, int i) {
         String digitoString = String.valueOf(rutInvertido[i]);
         int digitoRutAMultiplicar = Integer.parseInt(digitoString);
-        System.out.println(digitoRutAMultiplicar);
         return digitoRutAMultiplicar;
-    }*/
+    }
 
     public static void resultadoResta(int multiplicacionCadenas, int multiplicacionFinal) {
         int resultadoDigitoVerificador = multiplicacionCadenas - multiplicacionFinal;
