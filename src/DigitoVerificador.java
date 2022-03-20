@@ -54,7 +54,6 @@ public class DigitoVerificador {
             rutInvertido [j] = rut[i];  
         }
 
-        System.out.println(rutInvertido);
         cadenaParaMultiplicar(rutInvertido);
     }
 
