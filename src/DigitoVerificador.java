@@ -10,15 +10,15 @@ public class DigitoVerificador {
 
         System.out.println("Por favor ingrese su rut sin puntos ni digito verificador.");
         String line = scanner.nextLine();
-        //scanner.close(); Me manda error si pongo esto
         verificarNumeroRut(line);
+        scanner.close();
     }
 
     public static void verificarNumeroRut(String line) {
         try {
             int rut = Integer.parseInt(line);
             verificarTamañoRut(rut);
-        }catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             pedirRut();
         }
     }
@@ -27,37 +27,37 @@ public class DigitoVerificador {
         int valorMaximo = 99999999;
         int valorMinimo = 1000000;
 
-        if(rut < valorMinimo || rut > valorMaximo) {
+        if (rut < valorMinimo || rut > valorMaximo) {
             pedirRut();
-        }else {
+        } else {
             convertirIntAArreglo(rut);
         }
-    }  
+    }
 
     public static void convertirIntAArreglo(int rut) {
-        char [] chars = String.valueOf(rut).toCharArray();
+        char[] chars = String.valueOf(rut).toCharArray();
         invertirRut(chars);
     }
 
     public static void invertirRut(char[] rut) {
-        char [] rutInvertido = new char [rut.length];
+        char[] rutInvertido = new char[rut.length];
 
-        for(int i = rut.length - 1, j = 0; i >= 0; i--, j++) {
-            rutInvertido [j] = rut[i];  
+        for (int i = rut.length - 1, j = 0; i >= 0; i--, j++) {
+            rutInvertido[j] = rut[i];
         }
 
         cadenaParaMultiplicar(rutInvertido);
     }
 
     public static void cadenaParaMultiplicar(char[] rutInvertido) {
-        int [] cadenaParaMultiplicar = new int[rutInvertido.length];
+        int[] cadenaParaMultiplicar = new int[rutInvertido.length];
         int numeroMultiplicador = 2;
 
-        for(int i = 0; i < rutInvertido.length; i++) {
-            if(numeroMultiplicador < 8) {
+        for (int i = 0; i < rutInvertido.length; i++) {
+            if (numeroMultiplicador < 8) {
                 cadenaParaMultiplicar[i] = numeroMultiplicador;
                 numeroMultiplicador++;
-            }else {
+            } else {
                 numeroMultiplicador = 2;
                 i--;
             }
@@ -66,14 +66,12 @@ public class DigitoVerificador {
         multiplicarCadenas(cadenaParaMultiplicar, rutInvertido);
     }
 
-    public static void multiplicarCadenas(int [] cadenaParaMultiplicar, char [] rutInvertido) {
+    public static void multiplicarCadenas(int[] cadenaParaMultiplicar, char[] rutInvertido) {
         int multiplicacionCadenas = 0;
-        int digitoRutAMultiplicar = 0;
-        int auxMultiplicacion = 0;
 
-        for(int i = 0; i < rutInvertido.length; i++) {
-            digitoRutAMultiplicar = convertirCharAInt(rutInvertido, i);
-            auxMultiplicacion = cadenaParaMultiplicar[i] * digitoRutAMultiplicar;
+        for (int i = 0; i < rutInvertido.length; i++) {
+            int digitoRutAMultiplicar = convertirCharAInt(rutInvertido[i]);
+            int auxMultiplicacion = cadenaParaMultiplicar[i] * digitoRutAMultiplicar;
             multiplicacionCadenas += auxMultiplicacion;
         }
 
@@ -83,27 +81,20 @@ public class DigitoVerificador {
         imprimirDigitoVerificador(resultadoDigitoVerificador);
     }
 
-    public static int convertirCharAInt(char [] rutInvertido, int i) {
-        String digitoString = String.valueOf(rutInvertido[i]);
-        int digitoRutAMultiplicar = Integer.parseInt(digitoString);
-        return digitoRutAMultiplicar;
-    }
-
-    public static void resultadoResta(int multiplicacionCadenas, int multiplicacionFinal) {
-        int resultadoDigitoVerificador = multiplicacionCadenas - multiplicacionFinal;
-
-        imprimirDigitoVerificador(resultadoDigitoVerificador);
+    public static int convertirCharAInt(char caracterRutInvertido) {
+        String digitoString = String.valueOf(caracterRutInvertido);
+        return Integer.parseInt(digitoString);
     }
 
     public static void imprimirDigitoVerificador(int resultadoDigitoVerificador) {
-        
-        if(resultadoDigitoVerificador == 11) {
+
+        if (resultadoDigitoVerificador == 11) {
             System.out.println("El dígito verificador es: 0");
 
-        }else if(resultadoDigitoVerificador == 10) {
+        } else if (resultadoDigitoVerificador == 10) {
             System.out.println("El dígito verificador es: k");
 
-        }else {
+        } else {
             System.out.println("El dígito verificador es: " + resultadoDigitoVerificador);
         }
     }
