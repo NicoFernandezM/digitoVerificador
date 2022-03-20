@@ -50,9 +50,8 @@ public class DigitoVerificador {
     public static void invertirRut(char[] rut) {
         char [] rutInvertido = new char [rut.length];
 
-        for(int i = rut.length - 1; i >= 0; i--) {
-            rutInvertido [rut.length - 1] = rut[i];  
-            System.out.println(rut[i]);
+        for(int i = rut.length - 1, j = 0; i >= 0; i--, j++) {
+            rutInvertido [j] = rut[i];  
         }
 
         cadenaParaMultiplicar(rutInvertido);
